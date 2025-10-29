@@ -14,7 +14,7 @@ export default function HouseCelestreLanding() {
   // Ref to the SVG for red thread animation
   const svgRef = useRef(null);
 
-  // Controls whether the Substack modal is visible (placeholder for static export)
+  // Controls whether the Substack modal is visible
   const [showModal, setShowModal] = useState(false);
 
   // Timing constants in milliseconds
@@ -176,20 +176,19 @@ export default function HouseCelestreLanding() {
 
                 {/* Invitation button */}
                 <motion.div initial={{ opacity: 0, scale: 0.98, y: 8 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.45 }} className="mt-12">
-                  <a href="https://housecelestre.substack.com/subscribe" target="_blank" rel="noreferrer">
-                    <button
-                      className="px-10 py-4 rounded-sm text-sm md:text-base tracking-wider font-medium"
-                      style={{
-                        backgroundColor: CREAM,
-                        color: BG,
-                        letterSpacing: '0.15em',
-                        fontFamily: 'Inter, sans-serif',
-                        fontWeight: 500
-                      }}
-                    >
-                      REQUEST INVITATION
-                    </button>
-                  </a>
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="px-10 py-4 rounded-sm text-sm md:text-base tracking-wider font-medium"
+                    style={{
+                      backgroundColor: CREAM,
+                      color: BG,
+                      letterSpacing: '0.15em',
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: 500
+                    }}
+                  >
+                    REQUEST INVITATION
+                  </button>
                 </motion.div>
 
                 {/* Footer with social icons */}
@@ -231,6 +230,73 @@ export default function HouseCelestreLanding() {
           </div>
         )}
       </div>
+
+      {/* Substack Modal */}
+      {showModal && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-6"
+          style={{ backgroundColor: 'rgba(17, 17, 17, 0.85)' }}
+          onClick={() => setShowModal(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className="relative w-full max-w-md bg-black rounded-lg p-8"
+            style={{ border: `1px solid ${CREAM}20` }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-4 text-2xl"
+              style={{ color: CREAM, opacity: 0.6 }}
+              aria-label="Close modal"
+            >
+              ×
+            </button>
+
+            {/* Modal content */}
+            <div className="text-center mb-6">
+              <h2 style={{ fontFamily: "Playfair Display, serif", color: CREAM, fontSize: '1.75rem', marginBottom: '0.5rem' }}>
+                Request Invitation
+              </h2>
+              <p style={{ color: CREAM, opacity: 0.8, fontSize: '0.875rem' }}>
+                Join the House Celestre mailing list
+              </p>
+            </div>
+
+            {/* Substack Embed */}
+            <iframe
+              src="https://housecelestre.substack.com/embed"
+              width="100%"
+              height="320"
+              style={{ border: 'none', background: 'transparent' }}
+              frameBorder="0"
+              scrolling="no"
+              title="Substack subscription form"
+            />
+
+            {/* Fallback link */}
+            <div className="text-center mt-4">
+              <p style={{ color: CREAM, opacity: 0.6, fontSize: '0.75rem' }}>
+                Having trouble?{' '}
+                <a
+                  href="https://housecelestre.substack.com/subscribe"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: RED, textDecoration: 'underline' }}
+                >
+                  Open in new tab
+                </a>
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }
