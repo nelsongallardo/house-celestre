@@ -168,7 +168,7 @@ export default function HouseCelestreLanding() {
         {/* Main content revealed after collapse */}
         {phase === "revealed" && (
           <div className="absolute inset-0 flex flex-col justify-center items-center px-6">
-            <div className="w-full max-w-3xl mx-auto text-center" style={{ marginTop: '10vh' }}>
+            <div className="w-full max-w-3xl mx-auto text-center" style={{ marginTop: '20vh' }}>
               <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                 <h1 style={{ fontFamily: "Playfair Display, serif", color: CREAM }} className="text-4xl md:text-5xl lg:text-6xl leading-tight mb-1">
                   Time slows here.
